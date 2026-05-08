@@ -21,19 +21,26 @@ public class Main extends Application {
         Label paisLabel = new Label("Pais:");
         ComboBox<String> paisComboBox = new ComboBox<>();
         paisComboBox.getItems().addAll("España", "Venezuela", "Brazil");
-        paisComboBox.getSelectionModel().select(0);
 
         gridPane.add(paisLabel, 0, 0);
         gridPane.add(paisComboBox, 1, 0);
 
         Button boton = new Button("Enviar");
         boton.setOnAction(e -> {
-            Alert mesanje = new Alert(Alert.AlertType.INFORMATION);
-            mesanje.setTitle("Mensaje");
-            mesanje.setHeaderText("Pais seleccionado");
-            mesanje.setContentText(paisComboBox.getValue());
-            mesanje.showAndWait();
-            return;
+            String pais = paisComboBox.getSelectionModel().getSelectedItem();
+            if(pais !=null){
+                Alert mesanje = new Alert(Alert.AlertType.INFORMATION);
+                mesanje.setTitle("Mensaje");
+                mesanje.setHeaderText("Pais seleccionado");
+                mesanje.setContentText(paisComboBox.getValue());
+                mesanje.showAndWait();
+            }else{
+                Alert mesanje = new Alert(Alert.AlertType.WARNING);
+                mesanje.setTitle("Mensaje");
+                mesanje.setHeaderText("Pais no seleccionado");
+                mesanje.showAndWait();
+            }
+
         });
         gridPane.add(boton, 1, 1);
         Scene scene = new Scene(gridPane);
